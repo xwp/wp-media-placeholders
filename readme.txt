@@ -1,4 +1,4 @@
-=== Missing Upload Placeholders ===
+=== Media Placeholders ===
 Contributors:      X-team, westonruter
 Tags:              placeholders, uploads, development, images, 404
 Requires at least: 3.5
@@ -52,5 +52,5 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 
 == Changelog ==
 
-= 1.0 =
+= 0.9 =
 First Release

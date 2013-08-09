@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Missing Upload Placeholders
+ * Plugin Name: Media Placeholders
  * Plugin URI:  http://github.com/x-team/wp-missing-upload-placeholders
  * Description: Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
  * Version:     0.9
@@ -27,7 +27,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-class Missing_Upload_Placeholders {
+class Media_Placeholders {
 	static function setup() {
 		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ) );
 	}
@@ -168,4 +168,4 @@ class Missing_Upload_Placeholders {
 	}
 }
 
-add_action( 'plugins_loaded', array( 'Missing_Upload_Placeholders', 'setup' ) );
+add_action( 'plugins_loaded', array( 'Media_Placeholders', 'setup' ) );
