@@ -51,15 +51,15 @@ class Media_Placeholders {
 		$relative_upload_path = parse_url( $relative_upload_path, PHP_URL_PATH );
 
 		$attached_file = $relative_upload_path;
-		$width = null;
-		$height = null;
+		$width         = null;
+		$height        = null;
 		if ( preg_match( '#(.+)(?:-(\d+)x(\d+))(\.\w+)#', $relative_upload_path, $matches ) ) {
 			$attached_file = $matches[1] . $matches[4];
-			$width = (int) $matches[2];
-			$height = (int) $matches[3];
+			$width         = (int) $matches[2];
+			$height        = (int) $matches[3];
 		}
 
-		$query = $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attached_file' AND meta_value = %s ", $attached_file );
+		$query = $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attached_file' AND meta_value = %s", $attached_file );
 		$attachment_id = $wpdb->get_var( $query );
 		if ( empty( $attachment_id ) ) {
 			return;
@@ -80,7 +80,7 @@ class Media_Placeholders {
 		}
 		$redirect_server = apply_filters( 'missing_uploaded_image_redirect_server', $default_server, $attachment_id );
 		if ( $redirect_server ) {
-			$url = is_ssl() ? 'https://' : 'http://';
+			$url  = is_ssl() ? 'https://' : 'http://';
 			$url .= $redirect_server;
 			$url .= $_SERVER['REQUEST_URI'];
 			wp_redirect( $url );
@@ -132,14 +132,14 @@ class Media_Placeholders {
 	static function filter_placeholdit_image_url( $url, $args = '' ) {
 		extract( wp_parse_args( $args ) ); // => $attached_file, $width, $height, $attachment_id
 		$name_hash = md5( $attached_file );
-		$bgcolor = substr( $name_hash, 0, 6 );
-		$fgcolor = substr( $name_hash, 6, 6 );
-		$ext = preg_replace( '/.+\./', '', $attached_file );
-		$name = rtrim( basename( $attached_file, $ext ), '.' );
-		$ext = 'png'; // yeah, JPEGs look awful
-		$name .= " ({$width}x{$height})";
-		$name = urlencode( $name );
-		$url = "http://placehold.it/{$width}x{$height}/{$bgcolor}/{$fgcolor}/{$ext}&text={$name}";
+		$bgcolor   = substr( $name_hash, 0, 6 );
+		$fgcolor   = substr( $name_hash, 6, 6 );
+		$ext       = preg_replace( '/.+\./', '', $attached_file );
+		$name      = rtrim( basename( $attached_file, $ext ), '.' );
+		$ext       = 'png'; // yeah, JPEGs look awful
+		$name     .= " ({$width}x{$height})";
+		$name      = urlencode( $name );
+		$url       = "http://placehold.it/{$width}x{$height}/{$bgcolor}/{$fgcolor}/{$ext}&text={$name}";
 		return $url;
 	}
 
