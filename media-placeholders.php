@@ -29,7 +29,7 @@
 
 class Media_Placeholders {
 	static function setup() {
-		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ) );
+		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ), 9 ); // at 9 so before redirect_canonical
 	}
 
 	/**
@@ -37,16 +37,17 @@ class Media_Placeholders {
 	 */
 	static function handle_missing_upload() {
 		global $wpdb;
-		if ( ! is_404() ) {
-			return;
-		}
-
 		$upload_dir = wp_upload_dir();
 		$base_url_path = parse_url( $upload_dir['baseurl'], PHP_URL_PATH );
 
+		// Checking for is_404() is not helpful as WordPress will load the attachment template
+		// if the uploaded file was deleted, so our first check is to see if we're requesting
+		// something inside of the uploads directory, and if WordPress is serving this response
+		// then obviously the file is missing.
 		if ( strpos( $_SERVER['REQUEST_URI'], $base_url_path ) !== 0 ) {
 			return;
 		}
+
 		$relative_upload_path = substr( $_SERVER['REQUEST_URI'], strlen( $base_url_path ) + 1 );
 		$relative_upload_path = parse_url( $relative_upload_path, PHP_URL_PATH );
 
