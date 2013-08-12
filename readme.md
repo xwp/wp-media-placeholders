@@ -53,6 +53,9 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 
 ## Changelog ##
 
+### 0.9.1 ###
+Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/x-team/wp-media-placeholders/pull/5))
+
 ### 0.9 ###
 First Release
 
