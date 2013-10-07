@@ -2,7 +2,7 @@
 Contributors:      X-team, westonruter
 Tags:              placeholders, uploads, development, images, 404
 Requires at least: 3.5
-Tested up to:      3.6
+Tested up to:      3.6.1
 Stable tag:        trunk
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,9 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-media-placeholders/issues) reported there before going to the plugin forum.**
 
 == Changelog ==
+
+= 0.9.2 =
+Apply PHPCS fixes and integrate Travis CI
 
 = 0.9.1 =
 Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/x-team/wp-media-placeholders/pull/5))

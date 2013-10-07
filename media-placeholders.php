@@ -3,7 +3,7 @@
  * Plugin Name: Media Placeholders
  * Plugin URI:  http://github.com/x-team/wp-missing-upload-placeholders
  * Description: Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
- * Version:     0.9.1
+ * Version:     0.9.2
  * Author:      X-Team
  * Author URI:  http://x-team.com/wordpress/
  * License:     GPLv2+
