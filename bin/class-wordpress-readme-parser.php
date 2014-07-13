@@ -40,7 +40,7 @@ class WordPress_Readme_Parser {
 		foreach ( explode( "\n", $matches[2] ) as $metadatum ) {
 			preg_match( '/^(.+?):\s+(.+)$/', $metadatum, $metadataum_matches ) || \WP_CLI::error( "Parse error in $metadatum" );
 			list( $name, $value )  = array_slice( $metadataum_matches, 1, 2 );
-			$this->metadata[$name] = $value;
+			$this->metadata[ $name ] = $value;
 		}
 		$this->metadata['Contributors'] = preg_split( '/\s*,\s*/', $this->metadata['Contributors'] );
 		$this->metadata['Tags'] = preg_split( '/\s*,\s*/', $this->metadata['Tags'] );
@@ -166,8 +166,8 @@ class WordPress_Readme_Parser {
 			$markdown .= "\n";
 
 			$body = $section['body'];
-			if ( isset( $section_formatters[$section['heading']] ) ) {
-				$body = trim( call_user_func( $section_formatters[$section['heading']], $body ) );
+			if ( isset( $section_formatters[ $section['heading'] ] ) ) {
+				$body = trim( call_user_func( $section_formatters[ $section['heading'] ], $body ) );
 			}
 			if ( $body ) {
 				$markdown .= sprintf( "%s\n", $body );

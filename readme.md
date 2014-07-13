@@ -54,7 +54,7 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-media-placeholders/issues) reported there before going to the plugin forum.**
 
-[![Build Status](https://travis-ci.org/x-team/wp-media-placeholders.png)](https://travis-ci.org/x-team/wp-media-placeholders)
+[![Build Status](https://travis-ci.org/dero/wp-media-placeholders.png)](https://travis-ci.org/dero/wp-media-placeholders)
 
 ## Changelog ##
 
