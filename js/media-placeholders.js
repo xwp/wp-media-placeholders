@@ -26,14 +26,14 @@
 							width           = dimensions[1];
 							height          = dimensions[2];
 							knownDimensions = true;
-						// If we still have no dimensions, we'll look into the catalog
+						// If we still have no dimensions, we'll look into the catalogue
 						} else {
-							for ( var i in WPMediaPlaceholders.catalog ) {
-								if ( WPMediaPlaceholders.catalog.hasOwnProperty( i ) ) {
-									var catalogFilename = upload_base + '/' + i;
-									if ( filename.replace( /^https?\:/, '' ) === catalogFilename ) {
-										width           = WPMediaPlaceholders.catalog[i].width;
-										height          = WPMediaPlaceholders.catalog[i].height;
+							for ( var i in WPMediaPlaceholders.catalogue ) {
+								if ( WPMediaPlaceholders.catalogue.hasOwnProperty( i ) ) {
+									var catalogueFilename = upload_base + '/' + i;
+									if ( filename.replace( /^https?\:/, '' ) === catalogueFilename ) {
+										width           = WPMediaPlaceholders.catalogue[i].width;
+										height          = WPMediaPlaceholders.catalogue[i].height;
 										knownDimensions = true;
 									}
 								}

@@ -31,8 +31,8 @@ class Media_Placeholders {
 	/**
 	 * Gathers information about WP attachments, used by holder.js on the front end
 	 */
-	private static $attachment_catalog = array(
-		'catalog' => array(),
+	private static $attachment_catalogue = array(
+		'catalogue' => array(),
 		'hash'    => '',
 	);
 
@@ -40,7 +40,7 @@ class Media_Placeholders {
 		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ), 9 ); // at 9 so before redirect_canonical
 
 		if ( apply_filters( 'media_placeholders_offline', false ) ) {
-			add_action( 'init', array( __CLASS__, 'generate_attachments_catalog' ) );
+			add_action( 'init', array( __CLASS__, 'generate_attachments_catalogue' ) );
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'init_front_end_rewrites' ) );
 		}
 	}
@@ -50,16 +50,16 @@ class Media_Placeholders {
 	 */
 	static function init_front_end_rewrites() {
 		wp_enqueue_script( 'holder-js', plugins_url( 'js/holder.js', __FILE__ ), array(), '1.0.0', false );
-		wp_enqueue_script( 'media-placeholders-catalog', plugins_url( 'js/attachment-catalog.js?' . self::$attachment_catalog['hash'], __FILE__ ), array( 'holder-js' ), '1.0.0', false );
-		wp_enqueue_script( 'media-placeholders', plugins_url( 'js/media-placeholders.js', __FILE__ ), array( 'media-placeholders-catalog' ), '1.0.0', false );
+		wp_enqueue_script( 'media-placeholders-catalogue', plugins_url( 'js/attachment-catalogue.js?' . self::$attachment_catalogue['hash'], __FILE__ ), array( 'holder-js' ), '1.0.0', false );
+		wp_enqueue_script( 'media-placeholders', plugins_url( 'js/media-placeholders.js', __FILE__ ), array( 'media-placeholders-catalogue' ), '1.0.0', false );
 	}
 
 	/**
-	 * Generates the attachments catalog
+	 * Generates the attachments catalogue
 	 *
 	 * TODO: What needs to be done for this to work on multisite?
 	 */
-	static function generate_attachments_catalog( $mime_types = 'image' ) {
+	static function generate_attachments_catalogue( $mime_types = 'image' ) {
 		$args = array(
 			'posts_per_page' => -1,
 			'post_type' => 'attachment',
@@ -79,37 +79,37 @@ class Media_Placeholders {
 
 			$attachment_meta = get_post_meta( $attachment->ID, '_wp_attachment_metadata', true );
 			if ( isset( $attachment_meta['width'], $attachment_meta['height'], $attachment_meta['file'] ) ) {
-				$attachment_catalog[ $attachment_meta['file'] ] = array(
+				$attachment_catalogue[ $attachment_meta['file'] ] = array(
 					'width' => (int) $attachment_meta['width'],
 					'height' => (int) $attachment_meta['height'],
 				);
 			}
 		}
-		self::$attachment_catalog = array(
-			'catalog' => $attachment_catalog,
-			'hash'    => md5( serialize( $attachment_catalog ) ),
+		self::$attachment_catalogue = array(
+			'catalogue' => $attachment_catalogue,
+			'hash'    => md5( serialize( $attachment_catalogue ) ),
 		);
 	}
 
 	/**
-	 * Returns the catalog as a JSON
+	 * Returns the catalogue as a JSON
 	 */
-	static function render_catalog() {
+	static function render_catalogue() {
 		status_header( 200 );
 
 		header( 'Content-Type: application/javascript' );
 		// TODO: This probably needs some intelligent caching logic, clients shouldn't need to ever
-		// download the catalog again (see the unique query 'hash' parameter)
+		// download the catalogue again (see the unique query 'hash' parameter)
 
 		$upload_dir = wp_upload_dir();
 		$upload_url = preg_replace( '~^https?:~', '', $upload_dir['baseurl'] );
 
-		$catalog_structure = array(
+		$catalogue_structure = array(
 			'baseURL' => $upload_url,
-			'catalog' => self::$attachment_catalog['catalog'],
+			'catalogue' => self::$attachment_catalogue['catalogue'],
 		);
 		echo 'var WPMediaPlaceholders = ';
-		echo json_encode( $catalog_structure );
+		echo json_encode( $catalogue_structure );
 	}
 
 	/**
@@ -119,10 +119,10 @@ class Media_Placeholders {
 		global $wpdb;
 		$upload_dir    = wp_upload_dir();
 		$base_url_path = parse_url( $upload_dir['baseurl'], PHP_URL_PATH );
-		$catalog_url   = plugins_url( 'js/attachment-catalog.js', __FILE__ );
+		$catalogue_url   = plugins_url( 'js/attachment-catalogue.js', __FILE__ );
 
-		if ( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) === parse_url( $catalog_url, PHP_URL_PATH ) ) {
-			self::render_catalog();
+		if ( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) === parse_url( $catalogue_url, PHP_URL_PATH ) ) {
+			self::render_catalogue();
 			exit;
 		}
 
@@ -217,9 +217,9 @@ class Media_Placeholders {
 	}
 
 	/**
-	 * Generate catalog of all attachments and their dimensions, to be used in holder.js to determine placeholder dimensions
+	 * Generate catalogue of all attachments and their dimensions, to be used in holder.js to determine placeholder dimensions
 	 */
-	static function generate_attachment_catalog_js() {
+	static function generate_attachment_catalogue_js() {
 		header( 'Content-Type: application/javascript' );
 
 		die;
@@ -288,4 +288,4 @@ class Media_Placeholders {
 	}
 }
 
-add_action( 'plugins_loaded', array( 'Media_Placeholders', 'setup' ) );
+add_action( 'init', array( 'Media_Placeholders', 'setup' ) );
