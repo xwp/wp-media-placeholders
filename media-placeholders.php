@@ -28,8 +28,88 @@
  */
 
 class Media_Placeholders {
+	/**
+	 * Gathers information about WP attachments, used by holder.js on the front end
+	 */
+	private static $attachment_catalog = array(
+		'catalog' => array(),
+		'hash'    => '',
+	);
+
 	static function setup() {
 		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ), 9 ); // at 9 so before redirect_canonical
+
+		if ( apply_filters( 'media_placeholders_offline', true ) ) {
+			add_action( 'init', array( __CLASS__, 'generate_attachments_catalog' ) );
+			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'init_front_end_rewrites' ) );
+		}
+	}
+
+	/**
+	 * @action wp_enqueue_scripts
+	 */
+	static function init_front_end_rewrites() {
+		wp_enqueue_script( 'holder-js', plugins_url( 'js/holder.js', __FILE__ ), array(), '1.0.0', false );
+		wp_enqueue_script( 'media-placeholders-catalog', plugins_url( 'js/attachment-catalog.js?' . self::$attachment_catalog['hash'], __FILE__ ), array( 'holder-js' ), '1.0.0', false );
+		wp_enqueue_script( 'media-placeholders', plugins_url( 'js/media-placeholders.js', __FILE__ ), array( 'media-placeholders-catalog' ), '1.0.0', false );
+	}
+
+	/**
+	 * Generates the attachments catalog
+	 *
+	 * TODO: What needs to be done for this to work on multisite?
+	 */
+	static function generate_attachments_catalog( $mime_types = 'image' ) {
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => 'attachment',
+			'post_status' => 'any',
+		);
+
+		// TODO: Why doesn't this work?
+		if ( ! empty( $mime_types ) ) {
+			$args['post_mime_type'] = $mime_types;
+		}
+		$attachments = get_posts( $args );
+
+		foreach ( $attachments as $attachment ) {
+			if ( ! is_a( $attachment, 'WP_Post' ) ) {
+				continue;
+			}
+
+			$attachment_meta = get_post_meta( $attachment->ID, '_wp_attachment_metadata', true );
+			if ( isset( $attachment_meta['width'], $attachment_meta['height'], $attachment_meta['file'] ) ) {
+				$attachment_catalog[ $attachment_meta['file'] ] = array(
+					'width' => (int) $attachment_meta['width'],
+					'height' => (int) $attachment_meta['height'],
+				);
+			}
+		}
+		self::$attachment_catalog = array(
+			'catalog' => $attachment_catalog,
+			'hash'    => md5( serialize( $attachment_catalog ) ),
+		);
+	}
+
+	/**
+	 * Returns the catalog as a JSON
+	 */
+	static function render_catalog() {
+		status_header( 200 );
+
+		header( 'Content-Type: application/javascript' );
+		// TODO: This probably needs some intelligent caching logic, clients shouldn't need to ever
+		// download the catalog again (see the unique query 'hash' parameter)
+
+		$upload_dir = wp_upload_dir();
+		$upload_url = preg_replace( '~^https?:~', '', $upload_dir['baseurl'] );
+
+		$catalog_structure = array(
+			'baseURL' => $upload_url,
+			'catalog' => self::$attachment_catalog['catalog'],
+		);
+		echo 'var WPMediaPlaceholders = ';
+		echo json_encode( $catalog_structure );
 	}
 
 	/**
@@ -39,6 +119,12 @@ class Media_Placeholders {
 		global $wpdb;
 		$upload_dir    = wp_upload_dir();
 		$base_url_path = parse_url( $upload_dir['baseurl'], PHP_URL_PATH );
+		$catalog_url   = plugins_url( 'js/attachment-catalog.js', __FILE__ );
+
+		if ( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) === parse_url( $catalog_url, PHP_URL_PATH ) ) {
+			self::render_catalog();
+			exit;
+		}
 
 		// Checking for is_404() is not helpful as WordPress will load the attachment template
 		// if the uploaded file was deleted, so our first check is to see if we're requesting
@@ -46,6 +132,14 @@ class Media_Placeholders {
 		// then obviously the file is missing.
 		if ( strpos( $_SERVER['REQUEST_URI'], $base_url_path ) !== 0 ) {
 			return;
+		}
+
+		// If we're offline, we don't need to check anything else, because all logic will be
+		// done on front end side. We're sending 404 just to make super sure the <img> element
+		// will fire an error event
+		if ( apply_filters( 'media_placeholders_offline', true ) ) {
+			status_header( 404 );
+			exit;
 		}
 
 		$relative_upload_path = substr( $_SERVER['REQUEST_URI'], strlen( $base_url_path ) + 1 );
@@ -104,7 +198,6 @@ class Media_Placeholders {
 		if ( empty( $height ) ) {
 			$height = get_option( 'large_size_h' );
 		}
-
 		$filter_args = compact( 'attached_file', 'width', 'height', 'attachment_id' );
 
 		$default_builtin = defined( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN' )
@@ -119,9 +212,17 @@ class Media_Placeholders {
 			trigger_error( sprintf( 'Uncallable handler %s for missing image upload fallback', json_encode( $handler ) ), E_USER_WARNING );
 		}
 		$url = apply_filters( 'missing_uploaded_image_placeholder', $url, $filter_args );
-
 		wp_redirect( $url );
 		exit;
+	}
+
+	/**
+	 * Generate catalog of all attachments and their dimensions, to be used in holder.js to determine placeholder dimensions
+	 */
+	static function generate_attachment_catalog_js() {
+		header( 'Content-Type: application/javascript' );
+
+		die;
 	}
 
 	/**
