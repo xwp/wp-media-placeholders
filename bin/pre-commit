@@ -25,7 +25,7 @@ fi
 # PHP_CodeSniffer WordPress Coding Standards
 if [ $(git status --porcelain | egrep "^ ?[MARC]" | cut -c4- | egrep ".php$" | wc -l) != 0 ]; then
 	if command -v jshint >/dev/null 2>&1; then
-		phpcs_standard=$(if [ -e ruleset.xml ]; then echo ruleset.xml; else echo WordPress; fi)
+		phpcs_standard=$(if [ -e ruleset.xml ]; then echo ruleset.xml; else echo WordPress-Extra; fi)
 		phpcs -p -s -v --standard=$phpcs_standard $(git status --porcelain | egrep "^ ?[MARC]" | cut -c4- | egrep ".php$")
 	else
 		echo "Skipping phpcs since not installed"
