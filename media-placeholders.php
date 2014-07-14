@@ -39,7 +39,7 @@ class Media_Placeholders {
 	static function setup() {
 		add_action( 'template_redirect', array( __CLASS__, 'handle_missing_upload' ), 9 ); // at 9 so before redirect_canonical
 
-		if ( apply_filters( 'media_placeholders_offline', true ) ) {
+		if ( apply_filters( 'media_placeholders_offline', false ) ) {
 			add_action( 'init', array( __CLASS__, 'generate_attachments_catalog' ) );
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'init_front_end_rewrites' ) );
 		}
@@ -137,7 +137,7 @@ class Media_Placeholders {
 		// If we're offline, we don't need to check anything else, because all logic will be
 		// done on front end side. We're sending 404 just to make super sure the <img> element
 		// will fire an error event
-		if ( apply_filters( 'media_placeholders_offline', true ) ) {
+		if ( apply_filters( 'media_placeholders_offline', false ) ) {
 			status_header( 404 );
 			exit;
 		}
