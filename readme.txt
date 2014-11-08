@@ -13,6 +13,14 @@ Redirect requests to non-existent uploaded images to a placeholder service like 
 
 Activate this plugin to redirect all requests for missing uploaded images on your blog to your favorite placeholder image service, such as [placehold.it](http://placehold.it) or [placekitten.com](http://placekitten.com/). Note that although kittens are cute, the placehold.it service is actually more useful because the background and foreground color can remain consistant across all image sizes (e.g. full size vs thumbnail in a gallery), and so it is easier to see which images in a page are related to each other. (You can change the default placehold.it service to placekitten.com by defining `MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN` to be `placekitten_color` or `placekitten_grayscale`, or supplying those same values via the `missing_uploaded_image_placeholder_builtin` filter).
 
+**New in v0.9.3**  
+You can now use [LoremPixel](http://lorempixel.com) as your placholder of choice along with any of its categories.  0.9.3 supports the following parameters in the filter or defined constant:  
+* lorem
+* lorem_grayscale
+* lorem_[slug]
+* lorem_[slug]_grayscale
+* **example** `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_sports' );`
+
 **This plugin is for use during development only.** It is expected that this plugin will be activated on your local development environment (e.g. on Vagrant or XAMPP), or on your staging server. This plugin is especially useful when working on a team where you share around a database dump but not the uploaded images (which should always be omitted from the code repository), so if you give a database dump to another developer but don't include the uploaded images, with this plugin enabled they will see a placeholder where the uploaded image appears. This plugin is an alternative approach to what is offered by the [Uploads by Proxy](http://wordpress.org/plugins/uploads-by-proxy/) plugin.
 
 If you have applied the production database to another environment which lacks the uploaded files, but you know that all images referenced in the database do exist on production, you can define the `MISSING_UPLOADED_IMAGE_REDIRECT_SERVER` constant or filter `missing_uploaded_image_redirect_server` to short-circuit the placeholder service and redirect the image request to that server.
@@ -53,6 +61,12 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-media-placeholders/issues) reported there before going to the plugin forum.**
 
 == Changelog ==
+
+= 0.9.2 =
+Adds LoremPixel placeholders as of 11.08.2014
+* Used like so `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_grayscale' );`
+* Or you can use a slug of say sports: `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_sports' );`
+* The following slugs are supported with this version: abstract, animals, business, cats, city, food, nightlife, fashion, people, nature, sports, technics, transport
 
 = 0.9.2 =
 Apply PHPCS fixes and integrate Travis CI
