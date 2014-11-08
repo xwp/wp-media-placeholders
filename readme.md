@@ -17,7 +17,7 @@ Activate this plugin to redirect all requests for missing uploaded images on you
 
 ### New in v0.9.3 ###
 
-You can now use LoremPixel as your placholder of choice along with any of its categories.  0.9.3 supports the following parameters in the filter or defined constant:  
+You can now use [LoremPixel](http://lorempixel.com) as your placholder of choice along with any of its categories.  0.9.3 supports the following parameters in the filter or defined constant:  
 * lorem
 * lorem_grayscale
 * lorem_[slug]
