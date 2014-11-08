@@ -185,6 +185,28 @@ class Media_Placeholders {
 		$url = "http://placekitten.com/g/$width/$height";
 		return $url;
 	}
+
+	/**
+	 * Get URL to a placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_grayscale_image_url( $url, $args ){
+		$url = "http://lorempixel.com/g/$width/$height";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a placeholder image on placekitten.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_image_url( $url, $args ){
+		$url = "http://lorempixel.com/$width/$height";
+		return $url;
+	}
 }
 
 add_action( 'plugins_loaded', array( 'Media_Placeholders', 'setup' ) );
