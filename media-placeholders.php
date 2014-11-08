@@ -3,7 +3,7 @@
  * Plugin Name: Media Placeholders
  * Plugin URI:  http://github.com/x-team/wp-missing-upload-placeholders
  * Description: Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
- * Version:     0.9.2
+ * Version:     0.9.3
  * Author:      X-Team
  * Author URI:  http://x-team.com/wordpress/
  * License:     GPLv2+
@@ -193,18 +193,500 @@ class Media_Placeholders {
 	 * @return string
 	 */
 	static function filter_lorem_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
 		$url = "http://lorempixel.com/g/$width/$height";
 		return $url;
 	}
 
 	/**
-	 * Get URL to a placeholder image on placekitten.com
+	 * Get URL to a placeholder image on lorempixel.com
 	 * @param string|null $url
 	 * @param array|string $args {attached_file, width, height, attachment_id}
 	 * @return string
 	 */
 	static function filter_lorem_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
 		$url = "http://lorempixel.com/$width/$height";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a abstract placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_abstract_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/abstract";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a abstract placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_abstract_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/abstract";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a city placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_city_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/city";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a city placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_city_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/city";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a people placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_people_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/people";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a people placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_people_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/people";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a transport placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_transport_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/transport";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a transport placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_transport_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/transport";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a animals placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_animals_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/animals";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a animals placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_animals_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/animals";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a food placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_food_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/food";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a food placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_food_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/food";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a nature placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_nature_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/nature";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a nature placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_nature_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/nature";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a business placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_business_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/business";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a business placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_business_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/business";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a cats placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_cats_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/cats";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a cats placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_cats_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/cats";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a nightlife placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_nightlife_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/nightlife";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a nightlife placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_nightlife_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/nightlife";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a sports placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_sports_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/sports";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a sports placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_sports_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/sports";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a fashion placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_fashion_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/fashion";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a fashion placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_fashion_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/fashion";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a technics placeholder grayscale image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_technics_grayscale_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/g/$width/$height/technics";
+		return $url;
+	}
+
+	/**
+	 * Get URL to a technics placeholder image on lorempixel.com
+	 * @param string|null $url
+	 * @param array|string $args {attached_file, width, height, attachment_id}
+	 * @return string
+	 */
+	static function filter_lorem_technics_image_url( $url, $args ){
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
+		$url = "http://lorempixel.com/$width/$height/technics";
 		return $url;
 	}
 }

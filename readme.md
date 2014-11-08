@@ -4,7 +4,7 @@
 ![Banner](assets/banner-1544x500.png)
 Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
 
-**Contributors:** [x-team](http://profiles.wordpress.org/x-team), [westonruter](http://profiles.wordpress.org/westonruter)  
+**Contributors:** [x-team](http://profiles.wordpress.org/x-team), [westonruter](http://profiles.wordpress.org/westonruter), [jaywood](http://profiles.wordpress.org/phyrax)
 **Tags:** [placeholders](http://wordpress.org/plugins/tags/placeholders), [uploads](http://wordpress.org/plugins/tags/uploads), [development](http://wordpress.org/plugins/tags/development), [images](http://wordpress.org/plugins/tags/images), [404](http://wordpress.org/plugins/tags/404)  
 **Requires at least:** 3.5  
 **Tested up to:** 3.6.1  
@@ -57,6 +57,12 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 [![Build Status](https://travis-ci.org/x-team/wp-media-placeholders.png)](https://travis-ci.org/x-team/wp-media-placeholders)
 
 ## Changelog ##
+
+### 0.9.3 ###
+Adds LoremPixel placeholders as of 11.08.2014
+* Used like so `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_grayscale' );`
+* Or you can use a slug of say sports: `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_sports' );`
+* The following slugs are supported with this version: abstract, animals, business, cats, city, food, nightlife, fashion, people, nature, sports, technics, transport
 
 ### 0.9.2 ###
 Apply PHPCS fixes and integrate Travis CI

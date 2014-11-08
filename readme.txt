@@ -55,6 +55,12 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 == Changelog ==
 
 = 0.9.2 =
+Adds LoremPixel placeholders as of 11.08.2014
+* Used like so `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_grayscale' );`
+* Or you can use a slug of say sports: `define( 'MISSING_UPLOADED_IMAGE_PLACEHOLDER_BUILTIN', 'lorem_sports' );`
+* The following slugs are supported with this version: abstract, animals, business, cats, city, food, nightlife, fashion, people, nature, sports, technics, transport
+
+= 0.9.2 =
 Apply PHPCS fixes and integrate Travis CI
 
 = 0.9.1 =
