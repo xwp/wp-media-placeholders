@@ -4,12 +4,14 @@
 ![Banner](assets/banner-1544x500.png)
 Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
 
-**Contributors:** [x-team](http://profiles.wordpress.org/x-team), [westonruter](http://profiles.wordpress.org/westonruter)  
+**Contributors:** [xwp](http://profiles.wordpress.org/xwp), [westonruter](http://profiles.wordpress.org/westonruter)  
 **Tags:** [placeholders](http://wordpress.org/plugins/tags/placeholders), [uploads](http://wordpress.org/plugins/tags/uploads), [development](http://wordpress.org/plugins/tags/development), [images](http://wordpress.org/plugins/tags/images), [404](http://wordpress.org/plugins/tags/404)  
 **Requires at least:** 3.5  
 **Tested up to:** 3.6.1  
 **Stable tag:** trunk (master)  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
+
+[![Build Status](https://travis-ci.org/xwp/wp-media-placeholders.png?branch=master)](https://travis-ci.org/xwp/wp-media-placeholders) 
 
 ## Description ##
 
@@ -52,9 +54,7 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 	}
 	add_filter( 'missing_uploaded_image_placeholder', 'my_filter_missing_uploaded_image_placeholder', 10, 2 );
 
-**Development of this plugin is done [on GitHub](https://github.com/x-team/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-media-placeholders/issues) reported there before going to the plugin forum.**
-
-[![Build Status](https://travis-ci.org/x-team/wp-media-placeholders.png)](https://travis-ci.org/x-team/wp-media-placeholders)
+**Development of this plugin is done [on GitHub](https://github.com/xwp/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/xwp/wp-media-placeholders/issues) reported there before going to the plugin forum.**
 
 ## Changelog ##
 
@@ -62,7 +62,7 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 Apply PHPCS fixes and integrate Travis CI
 
 ### 0.9.1 ###
-Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/x-team/wp-media-placeholders/pull/5))
+Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/xwp/wp-media-placeholders/pull/5))
 
 ### 0.9 ###
 First Release
