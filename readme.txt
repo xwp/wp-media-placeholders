@@ -1,5 +1,5 @@
 === Media Placeholders ===
-Contributors:      X-team, westonruter
+Contributors:      xwp, westonruter
 Tags:              placeholders, uploads, development, images, 404
 Requires at least: 3.5
 Tested up to:      3.6.1
@@ -50,7 +50,7 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 	}
 	add_filter( 'missing_uploaded_image_placeholder', 'my_filter_missing_uploaded_image_placeholder', 10, 2 );
 
-**Development of this plugin is done [on GitHub](https://github.com/x-team/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-media-placeholders/issues) reported there before going to the plugin forum.**
+**Development of this plugin is done [on GitHub](https://github.com/xwp/wp-media-placeholders). Pull requests welcome. Please see [issues](https://github.com/xwp/wp-media-placeholders/issues) reported there before going to the plugin forum.**
 
 == Changelog ==
 
@@ -58,7 +58,7 @@ For example, you can add this to your `functions.php` or drop it into a `mu-plug
 Apply PHPCS fixes and integrate Travis CI
 
 = 0.9.1 =
-Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/x-team/wp-media-placeholders/pull/5))
+Prevent default WordPress 404 handler from breaking placeholder redirect ([#5](https://github.com/xwp/wp-media-placeholders/pull/5))
 
 = 0.9 =
 First Release
